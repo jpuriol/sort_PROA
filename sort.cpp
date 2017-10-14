@@ -1,3 +1,4 @@
+#include "sort.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -6,27 +7,7 @@
 #include <math.h>
 using namespace std;
 
-bool RandomVector( vector<int> &, int, int, mt19937);
-void CountSort(vector<int> &, int);
-void LSDRadixSortVector(vector<int> &, int);
-void ConcatenarVector(vector<int> &, const vector <int> &);
-int Digito(int, int);
-bool RandomList( list<int> &, int, int, mt19937);
-void LSDRadixSortLista(list<int> &, int);
-
-
-/**
-* @file sort_test.cpp
-*
-* Prácticas de PROA
-* Práctica 1.
-*
-* @author Ignacio Gomis Lli
-* @author Juan Pablo Uriol Balbin
-* @date 28/09/2017
-* @version 1.0
-*/
-int main()
+/*int main()
 {
 	int LOW { 0 };
 	int UPP1 { 255 };
@@ -204,18 +185,8 @@ int main()
 
 
 return 0;
-}
+}*/
 
-
-/**
-*
-* Generará un vector de enteros aleatorios
-*
-* @param[out] vect Vector de enteros con tamaño asignado
-* @param[in] lowlim Limite inferior aleatorio
-* @param[in] uplim Limite superior aleatorio
-* @return True if lowlim <= uplim False if lowlim>uplim
-*/
 
 bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 aleatorio)
 {
@@ -231,54 +202,30 @@ bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 aleatorio)
 		return false;
 }
 
-/**
-*
-* Aplicará el algoritmo CountSort sobre un vector
-*
-*
-* @param vect Vector a ordenar
-* @param max Número maximo que puede alcanzar el vector
-*
-*/
 
-void CountSort(vector<int> & vect, int max)
+vector<int> CountSort(const vector<int> & unsorted, int max)
 {
-		unsigned n = vect.size();
+		vector<int> sorted( unsorted.size() );
+		vector<int> aux(max);
 
-		vector<int> vect2 (n);
-
-		vector <int> aux( max+1 );
-
-		for(unsigned i = 0; i < n; i++)
-
-			aux[ vect[ i ] ] = aux[ vect[ i ] ] + 1;
+		for(unsigned i = 0; i < unsorted.size(); i++)
+			aux[ unsorted[i] - 1 ]++;  //aux[i] contiene cuantas veces aparece i+1 en v
 
 		for(int i = 1; i < max; i++)
+			aux[i] += aux[i-1];  //aux[i] contiene en que pos tiene que ir i+
 
-			aux[i] += aux[i - 1];
-
-
-        for(int j = n; j >= 0; j--)
+		cout << "aux[ unsorted[i] - 1 ] - 1 ]" << endl;
+		for(int i = unsorted.size() - 1; i >= 0; i--)
 		{
-
-			vect2[ aux[ vect[ j ]] -1  ]=vect[ j ];
-
-			aux[ vect[ j ]] -= 1;
-
+			cout << "[" << aux[ unsorted[i] - 1 ] - 1 << "]";
+			sorted[ aux[ unsorted[i] - 1 ] - 1 ]= unsorted[i];
+			aux[ unsorted[i] - 1 ]--;
 		}
+		cout<<endl;
 
-		vect=vect2;
+		return sorted;
 }
 
-/**
-*
-* Aplicará el algoritmo LSDRadixSort sobre un vector
-*
-*
-* @param vect Vector a ordenar
-* @param max Número maximo que puede alcanzar el vector
-*
-*/
 
 void LSDRadixSortVector(vector<int> & vect, int max)
 {
@@ -305,31 +252,12 @@ void LSDRadixSortVector(vector<int> & vect, int max)
 	}
 }
 
-/**
-*
-* Concatenacion de 2 vectores
-*
-*
-* @param v1 Vector inicial
-* @param v2 Vector a insertar tras v1
-*
-*/
 
 void ConcatenarVector(vector<int> & v1, const vector <int> & v2)
 {
 	for(unsigned i = 0;i < v2.size(); i++)
 		v1.push_back( v2[i] );
 }
-
-/**
-*
-* Obtiene un digito de un entero
-*
-*
-* @param posicion Indice de posición que obtener el digito del numero.
-* @param num Numero del cual obtener el digito.
-*
-*/
 
 
 int Digito(int posicion, int num)
@@ -340,17 +268,8 @@ int Digito(int posicion, int num)
 	return aux;
 }
 
-/**
-*
-* Generará una lista de enteros aleatorios
-*
-* @param lista Lista de enteros con tamaño asignado
-* @param lowlim Limite inferior aleatorio
-* @param uplim Limite superior aleatorio
-* @return True if lowlim <= uplim False if lowlim>uplim
-*/
 
-bool RandomList list<int> & lista, int lowlim, int uplim, mt19937 aleatorio)
+bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 aleatorio)
 {
     int num;
 	if(lowlim <= uplim)
@@ -368,15 +287,6 @@ bool RandomList list<int> & lista, int lowlim, int uplim, mt19937 aleatorio)
 		return false;
 }
 
-/**
-*
-* Aplicará el algoritmo LSDRadixSort sobre una lista
-*
-*
-* @param lista Lista a ordenar
-* @param max Número maximo que puede alcanzar la lista
-*
-*/
 
 void LSDRadixSortLista(list<int> & lista, int max)
 {
