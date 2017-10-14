@@ -1,4 +1,4 @@
-GTEST_DIR = ../googletest/googletest
+GTEST_DIR = ./googletest
 
 USER_DIR = .
 
