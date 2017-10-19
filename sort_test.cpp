@@ -1,3 +1,15 @@
+/**
+ * @file sort_test.cpp
+ *
+ * Practicas de PROA
+ * Practica 2.
+ *
+ * @author Ignacio Gomis Lli
+ * @author Juan Pablo Uriol Balbin
+ * @date 28/09/2017
+ * @version 1.0
+ */
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -17,15 +29,10 @@ bool RandomList(list<int> &, int, int, mt19937);
 void LSDRadixSortLista(list<int> &, int);
 
 /**
- * @file sort_test.cpp
  *
- * Prácticas de PROA
- * Práctica 1.
+ * Funcion Main
+ * Ejecuta las pruebas variando el metodo de ordenado.
  *
- * @author Ignacio Gomis Lli
- * @author Juan Pablo Uriol Balbin
- * @date 28/09/2017
- * @version 1.0
  */
 
 int main() {
@@ -43,6 +50,7 @@ int main() {
 	std::mt19937 aleatorio(SEED);
 	double total;
 
+    cout<<endl;
 	clock_gettime(CLOCK_REALTIME, &ini_time);
 	for (int i = 0; i < 1000; i++) {
 		RandomVector(vect, LOW, UPP1, aleatorio);
@@ -81,9 +89,9 @@ int main() {
 
 /**
  *
- * Generará un vector de enteros aleatorios
+ * Generara un vector de enteros aleatorios
  *
- * @param[out] vect Vector de enteros con tamaño asignado
+ * @param[out] vect Vector de enteros con tama�o asignado
  * @param[in] lowlim Limite inferior aleatorio
  * @param[in] uplim Limite superior aleatorio
  * @return True if lowlim <= uplim False if lowlim>uplim
@@ -102,11 +110,11 @@ bool RandomVector(vector<int> & vect, int lowlim, int uplim,
 
 /**
  *
- * Aplicará el algoritmo CountSort sobre un vector
+ * Aplicara el algoritmo CountSort sobre un vector
  *
  *
  * @param vect Vector a ordenar
- * @param max Número maximo que puede alcanzar el vector
+ * @param max Numero maximo que puede alcanzar el vector
  *
  */
 
@@ -138,11 +146,11 @@ void CountSort(vector<int> & vect, int max) {
 
 /**
  *
- * Aplicará el algoritmo LSDRadixSort sobre un vector
+ * Aplicara el algoritmo LSDRadixSort sobre un vector
  *
  *
  * @param vect Vector a ordenar
- * @param max Número maximo que puede alcanzar el vector
+ * @param max Numero maximo que puede alcanzar el vector
  *
  */
 
@@ -187,7 +195,7 @@ void ConcatenarVector(vector<int> & v1, const vector<int> & v2) {
  * Obtiene un digito de un entero
  *
  *
- * @param posicion Indice de posición que obtener el digito del numero.
+ * @param posicion Indice de posicion que obtener el digito del numero.
  * @param num Numero del cual obtener el digito.
  *
  */
@@ -201,9 +209,9 @@ int Digito(int posicion, int num) {
 
 /**
  *
- * Generará una lista de enteros aleatorios
+ * Generara una lista de enteros aleatorios
  *
- * @param lista Lista de enteros con tamaño asignado
+ * @param lista Lista de enteros con tamano asignado
  * @param lowlim Limite inferior aleatorio
  * @param uplim Limite superior aleatorio
  * @return True if lowlim <= uplim False if lowlim>uplim
@@ -225,11 +233,11 @@ bool RandomList(list<int> & lista, int lowlim, int uplim, mt19937 aleatorio) {
 
 /**
  *
- * Aplicará el algoritmo LSDRadixSort sobre una lista
+ * Aplicara el algoritmo LSDRadixSort sobre una lista
  *
  *
  * @param lista Lista a ordenar
- * @param max Número maximo que puede alcanzar la lista
+ * @param max Numero maximo que puede alcanzar la lista
  *
  */
 

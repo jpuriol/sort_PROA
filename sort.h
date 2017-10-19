@@ -1,3 +1,15 @@
+/**
+ * @file sort_stl.h
+ *
+ * Practicas de PROA
+ * Practica 2.
+ *
+ * @author Ignacio Gomis Lli
+ * @author Juan Pablo Uriol Balbin
+ * @date 19/10/2017
+ * @version 1.0
+ */
+
 #ifndef SORT_H
 #define SORT_H
 
