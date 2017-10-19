@@ -45,7 +45,7 @@ sort_unittests.o : $(USER_DIR)/sort_unittests.cpp \
 sort_unittests : sort.o sort_unittests.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 
-sort_main.o: 
+sort_main.o: sort_main.cpp sort.h
 	g++ -std=c++11 -O2 -Wall -Wextra -c sort_main.cpp 
 
 sort_main: sort_main.o sort.o
