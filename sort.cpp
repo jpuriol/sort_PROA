@@ -138,4 +138,5 @@ void PintList(const list<int> & lis)
 {
 	for(auto l : lis)
 		cout << "[" << l <<"]";
+	cout << endl;
 }
