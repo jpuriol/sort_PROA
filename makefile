@@ -4,7 +4,7 @@ USER_DIR = .
 
 CPPFLAGS += -std=c++11 -isystem $(GTEST_DIR)/include
 
-CXXFLAGS += -g -Wall -Wextra -pthread
+CXXFLAGS += -g -Wall -Wextra -pthread -O2
 
 TESTS = sort_unittests sort_main
 
@@ -45,8 +45,8 @@ sort_unittests.o : $(USER_DIR)/sort_unittests.cpp \
 sort_unittests : sort.o sort_unittests.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 
-sort_main.o: sort_main.cpp sort.h
+sort_main.o: sort_main.cpp
 	g++ -std=c++11 -O2 -Wall -Wextra -c sort_main.cpp 
 
 sort_main: sort_main.o sort.o
-	g++ -std=c++11 -O2 -Wall -Wextra sort_main.o -o sort_main
+	g++ -std=c++11 -O2 -Wall -Wextra sort_main.o sort.o -o sort_main
