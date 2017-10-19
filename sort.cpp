@@ -128,19 +128,14 @@ void RadixSortList(list<int> & lista, int max)
 }
 
 
-void PrintVector(const vector<int> & v) 
+void PrintVector(const vector<int> & vect) 
 {
-	unsigned n = v.size();
-	for(unsigned i = 0; i < n; i++)
-		cout << "[" << v[i] << "]";
+	for(auto v : vect)
+		cout << "[" << v << "]";
 	cout << endl; 
 }
-void PintList(const list<int> & l) 
+void PintList(const list<int> & lis) 
 {
-	auto iter = l.begin();
-	while(iter != l.end())
-	{
-		cout << "[" << *iter <<"]";
-		++iter;
-	}
+	for(auto l : lis)
+		cout << "[" << l <<"]";
 }
