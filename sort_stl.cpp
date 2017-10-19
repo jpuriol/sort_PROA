@@ -1,8 +1,8 @@
 /**
  * @file sort_stl.cpp
  *
- * Prácticas de PROA
- * Práctica 1.
+ * Practicas de PROA
+ * Practica 2.
  *
  * @author Ignacio Gomis Lli
  * @author Juan Pablo Uriol Balbin
@@ -27,7 +27,7 @@ void modulo(list<int> &, vector<int> &, int, int, mt19937 &);
 /**
  *
  * Funcion Main
- * Ejecuta las pruebas variando el tamaño de lista/vector y número de elementos.
+ * Ejecuta las pruebas variando el tama�o de lista/vector y numero de elementos.
  *
  */
 
@@ -58,9 +58,9 @@ int main() {
 
 /**
  *
- * Generará un vector de enteros aleatorios
+ * Generara un vector de enteros aleatorios
  *
- * @param[out] vect Vector de enteros con tamaño asignado
+ * @param[out] vect Vector de enteros con tama�o asignado
  * @param[in] lowlim Limite inferior aleatorio
  * @param[in] uplim Limite superior aleatorio
  * @return True if lowlim <= uplim False if lowlim>uplim
@@ -79,9 +79,9 @@ bool RandomVector(vector<int> & vect, int lowlim, int uplim,
 
 /**
  *
- * Generará una lista de enteros aleatorios
+ * Generara una lista de enteros aleatorios
  *
- * @param lista Lista de enteros con tamaño asignado
+ * @param lista Lista de enteros con tama�o asignado
  * @param lowlim Limite inferior aleatorio
  * @param uplim Limite superior aleatorio
  * @return True if lowlim <= uplim False if lowlim>uplim

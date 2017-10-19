@@ -1,3 +1,15 @@
+/**
+ * @file sort.cpp
+ *
+ * Practicas de PROA
+ * Practica 2.
+ *
+ * @author Ignacio Gomis Lli
+ * @author Juan Pablo Uriol Balbin
+ * @date 19/10/2017
+ * @version 1.0
+ */
+
 #include "sort.h"
 #include <iostream>
 #include <string>
@@ -8,7 +20,18 @@
 using namespace std;
 
 const int BASE_NUM = 16;
+int Digito(int, int);
+void ConcatenarVector(vector<int> &, const vector <int> &);
 
+/**
+ *
+ * Generara un vector de enteros aleatorios
+ *
+ * @param[out] vect Vector de enteros con tamaño asignado
+ * @param[in] lowlim Limite inferior aleatorio
+ * @param[in] uplim Limite superior aleatorio
+ * @return True if lowlim <= uplim False if lowlim>uplim
+ */
 bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 & aleatorio)
 {
 	uniform_int_distribution<> dis(lowlim, uplim);
@@ -22,7 +45,15 @@ bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 & aleatori
 		return false;
 }
 
-
+/**
+ *
+ * Aplicara el algoritmo CountSort sobre un vector
+ *
+ *
+ * @param vect Vector a ordenar
+ * @param max Numero maximo que puede alcanzar el vector
+ *
+ */
 void CountSort(vector<int> & vectorToSort, int max)
 {
 		vector<int> sorted( vectorToSort.size() );
@@ -44,8 +75,15 @@ void CountSort(vector<int> & vectorToSort, int max)
 	}
 
 
-int Digito(int, int);
-void ConcatenarVector(vector<int> &, const vector <int> &);
+/**
+ *
+ * Aplicara el algoritmo LSDRadixSort sobre un vector
+ *
+ *
+ * @param vect Vector a ordenar
+ * @param max Numero maximo que puede alcanzar el vector
+ *
+ */
 void RadixSortVector(vector<int> & vectorToSort, int max)
 {
   unsigned n = vectorToSort.size();
@@ -69,6 +107,15 @@ void RadixSortVector(vector<int> & vectorToSort, int max)
 	}
 }
 
+/**
+ *
+ * Concatenacion de 2 vectores
+ *
+ *
+ * @param v1 Vector inicial
+ * @param v2 Vector a insertar tras v1
+ *
+ */
 
 void ConcatenarVector(vector<int> & v1, const vector <int> & v2)
 {
@@ -76,6 +123,15 @@ void ConcatenarVector(vector<int> & v1, const vector <int> & v2)
 		v1.push_back( v2[i] );
 }
 
+/**
+ *
+ * Obtiene un digito de un entero
+ *
+ *
+ * @param posicion Indice de posicion que obtener el digito del numero.
+ * @param num Numero del cual obtener el digito.
+ *
+ */
 int Digito(int pos, int num)
 {
 	for(int i = 0; i < pos; i++)
@@ -84,7 +140,15 @@ int Digito(int pos, int num)
 	return num;
 }
 
-
+/**
+ *
+ * Generara una lista de enteros aleatorios
+ *
+ * @param lista Lista de enteros con tamano asignado
+ * @param lowlim Limite inferior aleatorio
+ * @param uplim Limite superior aleatorio
+ * @return True if lowlim <= uplim False if lowlim>uplim
+ */
 bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 & aleatorio)
 {
 	uniform_int_distribution<> dis(lowlim, uplim);
@@ -102,7 +166,15 @@ bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 & aleatorio)
 		return false;
 }
 
-
+/**
+ *
+ * Aplicara el algoritmo LSDRadixSort sobre una lista
+ *
+ *
+ * @param lista Lista a ordenar
+ * @param max Numero maximo que puede alcanzar la lista
+ *
+ */
 void RadixSortList(list<int> & lista, int max)
 {
 	int d;
@@ -127,13 +199,29 @@ void RadixSortList(list<int> & lista, int max)
 	}
 }
 
-
+/**
+ *
+ * Imprime un vector por pantalla
+ *
+ *
+ * @param vect Vector a imprimir
+ *
+ */
 void PrintVector(const vector<int> & vect) 
 {
 	for(auto v : vect)
 		cout << "[" << v << "]";
 	cout << endl; 
 }
+
+/**
+ *
+ * Imprime una Lista por pantalla
+ *
+ *
+ * @param lista Lista a imprimir
+ *
+ */
 void PintList(const list<int> & lis) 
 {
 	for(auto l : lis)
