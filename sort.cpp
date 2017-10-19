@@ -47,7 +47,7 @@ bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 & aleatori
 
 /**
  *
- * Aplicara el algoritmo CountSort sobre un vector
+ * Aplicara el algoritmo CountSort sobre un vector con valores empezando en 0
  *
  *
  * @param vect Vector a ordenar
@@ -56,23 +56,34 @@ bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 & aleatori
  */
 void CountSort(vector<int> & vectorToSort, int max)
 {
-		vector<int> sorted( vectorToSort.size() );
-		vector<int> aux(max);
+        ++max; ///< Añade el 0
+        vector<int> sorted( vectorToSort.size() );
+        vector<int> aux(max);
+        
+        PrintVector(vectorToSort); 
+        
+        for(unsigned i = 0; i < vectorToSort.size(); i++)
+            aux[ vectorToSort[i] ]++;  ///< aux[i] contiene cuantas veces aparece i+1 en v
 
-		for(unsigned i = 0; i < vectorToSort.size(); i++)
-			aux[ vectorToSort[i] - 1 ]++;  ///< aux[i] contiene cuantas veces aparece i+1 en v
+        PrintVector(aux);     
+            
+        for(int i = 1; i < max; i++)
+            aux[i] += aux[i-1];  ///< aux[i] contiene en que pos tiene que ir i+1
+            
+        for(int i = 0; i < max; i++) ///< Ajuste para añadir el 0
+            aux[ i ]--;  
 
-		for(int i = 1; i < max; i++)
-			aux[i] += aux[i-1];  ///< aux[i] contiene en que pos tiene que ir i+1
+        PrintVector(aux);    
+            
+        for(int i = vectorToSort.size() - 1; i >= 0; i--)
+        {
+            PrintVector(sorted);  
+            sorted[ aux[ vectorToSort[i] ] ]= vectorToSort[i];
+            aux[ vectorToSort[i] ]--;
+        }
 
-		for(int i = vectorToSort.size() - 1; i >= 0; i--)
-		{
-			sorted[ aux[ vectorToSort[i] - 1 ] - 1 ]= vectorToSort[i];
-			aux[ vectorToSort[i] - 1 ]--;
-		}
-
-		vectorToSort = sorted;
-	}
+        vectorToSort = sorted;
+    }
 
 
 /**
