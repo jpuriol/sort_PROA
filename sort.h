@@ -11,11 +11,11 @@ using namespace std;
 
 
 bool RandomVector( vector<int> &, int, int, mt19937);
-vector<int> CountSort(const vector<int> &, int);
-void LSDRadixSortVector(vector<int> &, int);
-void ConcatenarVector(vector<int> &, const vector <int> &);
-int Digito(int, int);
+void CountSort(vector<int> &, int);
+void RadixSortVector(vector<int> &, int);
 bool RandomList( list<int> &, int, int, mt19937);
-void LSDRadixSortLista(list<int> &, int);
+void RadixSortList(list<int> &, int);
+void PrintVector(const vector<int> &);
+void PintList(const vector<int> &);
 
-#endif  // GTEST_SAMPLES_SAMPLE1_H_
+#endif

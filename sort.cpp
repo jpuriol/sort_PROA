@@ -7,195 +7,14 @@
 #include <math.h>
 using namespace std;
 
-/*int main()
-{
-	int LOW { 0 };
-	int UPP1 { 255 };
-	int UPP2 { 65535 };
-	vector<int> vect(20);
-    list<int> lista(20);
-
-	const int SEED { 1413815 };
-	std::mt19937 aleatorio (SEED);
-
-
-
-	cout<<"Count Sort"<<endl;
-
-	if(RandomVector(vect,LOW,UPP1,aleatorio))
-	{
-		for(unsigned i = 0; i < vect.size(); i++)
-		{
-			cout<< vect[i] <<" ";
-			if(i%10==9)
-				cout<<endl;
-		}
-		cout<<endl;
-
-		CountSort(vect, UPP1);
-
-		for(unsigned i = 0; i < vect.size(); i++)
-		{
-			cout<< vect[i] <<" ";
-			if(i%10==9)
-				cout<<endl;
-		}
-		cout<<endl;
-
-	}
-
-	if(RandomVector(vect,LOW,UPP2,aleatorio))
-	{
-		for(unsigned i = 0; i < vect.size(); i++)
-		{
-			cout<< vect[i] <<" ";
-			if(i%10==9)
-				cout<<endl;
-		}
-		cout<<endl;
-
-		CountSort(vect, UPP2);
-
-		for(unsigned i = 0; i < vect.size(); i++)
-		{
-			cout<< vect[i] <<" ";
-			if(i%10==9)
-				cout<<endl;
-		}
-		cout<<endl;
-
-	}
-
-	cout<<"LSDRadixSortVector"<<endl;
-
-	if(RandomVector(vect,LOW,UPP1,aleatorio))
-	{
-		for(unsigned i = 0; i < vect.size(); i++)
-		{
-			cout<< vect[i] <<" ";
-			if(i%10==9)
-				cout<<endl;
-		}
-		cout<<endl;
-
-		LSDRadixSortVector(vect, UPP1);
-
-		for(unsigned i = 0; i < vect.size(); i++)
-		{
-			cout<< vect[i] <<" ";
-			if(i%10==9)
-				cout<<endl;
-		}
-		cout<<endl;
-	}
-
-	cout<<endl;
-
-	if(RandomVector(vect,LOW,UPP2,aleatorio))
-	{
-		for(unsigned i = 0; i < vect.size(); i++)
-		{
-			cout<< vect[i] <<" ";
-			if(i%10==9)
-				cout<<endl;
-		}
-		cout<<endl;
-
-		LSDRadixSortVector(vect, UPP2);
-
-		for(unsigned i = 0; i < vect.size(); i++)
-		{
-			cout<< vect[i] <<" ";
-			if(i%10==9)
-				cout<<endl;
-		}
-		cout<<endl;
-	}
-
-	cout<<endl<<"LSDRadixSortLista"<<endl;
-	int cont=0;
-
-	if(RandomList(lista,LOW,UPP1,aleatorio))
-	{
-		auto iter=lista.begin();
-        while(iter!=lista.end())
-        {
-            cout<<*iter<<" ";
-            iter++;
-            cont++;
-            if(cont==10)
-            {
-                cont=0;
-                cout<<endl;
-            }
-        }
-		cout<<endl;
-
-		LSDRadixSortLista(lista, UPP1);
-
-		iter=lista.begin();
-        while(iter!=lista.end())
-        {
-            cout<<*iter<<" ";
-            iter++;
-            cont++;
-            if(cont==10)
-            {
-                cont=0;
-                cout<<endl;
-            }
-        }
-
-	}
-
-	cout<<endl;
-
-	if(RandomList(lista,LOW,UPP2,aleatorio))
-	{
-		auto iter=lista.begin();
-        while(iter!=lista.end())
-        {
-            cout<<*iter<<" ";
-            iter++;
-            cont++;
-            if(cont==10)
-            {
-                cont=0;
-                cout<<endl;
-            }
-        }
-		cout<<endl;
-
-		LSDRadixSortLista(lista, UPP2);
-
-		iter=lista.begin();
-        while(iter!=lista.end())
-        {
-            cout<<*iter<<" ";
-            iter++;
-            cont++;
-            if(cont==10)
-            {
-                cont=0;
-                cout<<endl;
-            }
-        }
-		cout<<endl;
-	}
-
-
-return 0;
-}*/
-
+const int BASE_NUM = 10;
 
 bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 aleatorio)
 {
 	if(lowlim <= uplim)
 	{
 		for(unsigned i = 0; i < vect.size(); i++)
-		{
 			vect[i] = ( ( aleatorio() % (uplim - lowlim+1) ) + lowlim);
-		}
 		return true;
 	}
 	else
@@ -203,52 +22,48 @@ bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 aleatorio)
 }
 
 
-vector<int> CountSort(const vector<int> & unsorted, int max)
+void CountSort(vector<int> & vectorToSort, int max)
 {
-		vector<int> sorted( unsorted.size() );
+		vector<int> sorted( vectorToSort.size() );
 		vector<int> aux(max);
 
-		for(unsigned i = 0; i < unsorted.size(); i++)
-			aux[ unsorted[i] - 1 ]++;  //aux[i] contiene cuantas veces aparece i+1 en v
+		for(unsigned i = 0; i < vectorToSort.size(); i++)
+			aux[ vectorToSort[i] - 1 ]++;  //aux[i] contiene cuantas veces aparece i+1 en v
 
 		for(int i = 1; i < max; i++)
 			aux[i] += aux[i-1];  //aux[i] contiene en que pos tiene que ir i+
 
-		cout << "aux[ unsorted[i] - 1 ] - 1 ]" << endl;
-		for(int i = unsorted.size() - 1; i >= 0; i--)
+		for(int i = vectorToSort.size() - 1; i >= 0; i--)
 		{
-			cout << "[" << aux[ unsorted[i] - 1 ] - 1 << "]";
-			sorted[ aux[ unsorted[i] - 1 ] - 1 ]= unsorted[i];
-			aux[ unsorted[i] - 1 ]--;
+			sorted[ aux[ vectorToSort[i] - 1 ] - 1 ]= vectorToSort[i];
+			aux[ vectorToSort[i] - 1 ]--;
 		}
-		cout<<endl;
 
-		return sorted;
-}
+		vectorToSort = sorted;
+	}
 
 
-void LSDRadixSortVector(vector<int> & vect, int max)
+int Digito(int, int);
+void ConcatenarVector(vector<int> &, const vector <int> &);
+void RadixSortVector(vector<int> & vectorToSort, int max)
 {
-	vector<int> vacio(0);
+  unsigned n = vectorToSort.size();
 	int d;
-	unsigned n=vect.size();
-	vector<vector<int> > aux(n);
+	vector< vector<int> > aux(BASE_NUM);
 
-	for(unsigned i = 0;i <= log10(max)+1; i++)
-	{
-		for(unsigned j = 0; j < 10; j++)
-		{
-			aux[j] = vacio;
-		}
-		for(unsigned j = 0; j < n; j++)
-		{
+  for(unsigned i = 0; i <= log10(max); i++)
+  {
+    for(unsigned j = 0; j < BASE_NUM; j++)
+			aux[j].clear();
 
-			d = Digito( i, vect[j] );
-			aux[d].push_back( vect[j] );
+    for(unsigned j = 0; j < n; j++)
+    {
+			d = Digito( i, vectorToSort[j] );
+			aux[d].push_back( vectorToSort[j] );
 		}
-		for(unsigned j = 1; j < n; j++)
-			ConcatenarVector(aux[0], aux[j]);
-		vect = aux[0];
+		vectorToSort = aux[0];
+		for(unsigned j = 1; j < 10; j++)
+			ConcatenarVector(vectorToSort, aux[j]);
 	}
 }
 
@@ -259,10 +74,9 @@ void ConcatenarVector(vector<int> & v1, const vector <int> & v2)
 		v1.push_back( v2[i] );
 }
 
-
 int Digito(int posicion, int num)
 {
-	int aux = pow( 10 , posicion );
+	int aux = pow(10 , posicion );
 	aux = num / aux;
 	aux = aux % 10;
 	return aux;
@@ -271,7 +85,7 @@ int Digito(int posicion, int num)
 
 bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 aleatorio)
 {
-    int num;
+  int num;
 	if(lowlim <= uplim)
 	{
         auto iter=lista.begin();
@@ -288,34 +102,30 @@ bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 aleatorio)
 }
 
 
-void LSDRadixSortLista(list<int> & lista, int max)
+void RadixSortList(list<int> & lista, int max)
 {
-	list<int> vacio(0);
 	int d;
-	unsigned n=lista.size();
-	vector<list<int> > aux(n);
-
-
+	vector<list<int> > aux(BASE_NUM);
 
 	for(unsigned i = 0;i <= log10(max)+1; i++)
 	{
-        for(unsigned j = 0; j < 10; j++)
-		{
-			aux[j] = vacio;
-		}
+    for(unsigned j = 0; j < BASE_NUM; j++)
+			aux[j].clear();
 
-        auto iter=lista.begin();
-        while(iter!=lista.end())
-        {
-            d = Digito( i, *iter );
-            aux[d].push_back( *iter );
-            std::advance(iter,1);
-        }
+			auto iter=lista.begin();
+			while(iter!=lista.end())
+			{
+					d = Digito( i, *iter );
+					aux[d].push_back( *iter );
+					std::advance(iter,1);
+			}
 
-        for(unsigned j = 1; j < n; j++)
-			aux[0].insert(aux[0].end(),aux[j].begin(),aux[j].end());
+      for(unsigned j = 1; j < BASE_NUM; j++)
+				aux[0].insert(aux[0].end(),aux[j].begin(),aux[j].end());
 		lista = aux[0];
-
-
 	}
 }
+
+
+void PrintVector(const vector<int> &) {};
+void PintList(const vector<int> &) {};

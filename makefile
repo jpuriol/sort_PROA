@@ -6,7 +6,7 @@ CPPFLAGS += -std=c++11 -isystem $(GTEST_DIR)/include
 
 CXXFLAGS += -g -Wall -Wextra -pthread
 
-TESTS = sort_test
+TESTS = sort_unittests sort_main
 
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
@@ -38,9 +38,15 @@ gtest_main.a : gtest-all.o gtest_main.o
 sort.o : $(USER_DIR)/sort.cpp $(USER_DIR)/sort.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sort.cpp
 
-sort_test.o : $(USER_DIR)/sort_test.cpp \
+sort_unittests.o : $(USER_DIR)/sort_unittests.cpp \
                      $(USER_DIR)/sort.h $(GTT_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sort_test.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sort_unittests.cpp
 
-sort_test : sort.o sort_test.o gtest_main.a
+sort_unittests : sort.o sort_unittests.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+
+sort_main.o: 
+	g++ -std=c++11 -O2 -Wall -Wextra -c sort_main.cpp 
+
+sort_main: sort_main.o sort.o
+	g++ -std=c++11 -O2 -Wall -Wextra sort_main.o -o sort_main
