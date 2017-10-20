@@ -188,26 +188,27 @@ bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 & aleatorio)
  */
 void RadixSortList(list<int> & lista, int max)
 {
-	int d;
-	vector<list<int> > aux(BASE_NUM);
+    int d;
+    vector<list<int> > aux(BASE_NUM);
 
-	for(unsigned i = 0;i < log10(max); i++)
-	{
+    unsigned iterations = log2(max) / 4;
+    for(unsigned i = 0;i <= iterations; i++)
+    {
     for(unsigned j = 0; j < BASE_NUM; j++)
-			aux[j].clear();
+        aux[j].clear();
 
-			auto iter=lista.begin();
-			while(iter!=lista.end())
-			{
-					d = Digito( i, *iter );
-					aux[d].push_back( *iter );
-					std::advance(iter,1);
-			}
+        auto iter=lista.begin();
+        while(iter!=lista.end())
+        {
+            d = Digito( i, *iter );
+            aux[d].push_back( *iter );
+            std::advance(iter,1);
+        }
 
-      for(unsigned j = 1; j < BASE_NUM; j++)
-				aux[0].splice(aux[0].end(), aux[j]);
-		lista = aux[0];
-	}
+    for(unsigned j = 1; j < BASE_NUM; j++)
+        aux[0].splice(aux[0].end(), aux[j]);
+    lista = aux[0];
+    }
 }
 
 /**
