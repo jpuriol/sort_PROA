@@ -34,15 +34,15 @@ void ConcatenarVector(vector<int> &, const vector <int> &);
  */
 bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 & aleatorio)
 {
-	uniform_int_distribution<> dis(lowlim, uplim);
-	if(lowlim <= uplim)
-	{
-		for(unsigned i = 0; i < vect.size(); i++)
-			vect[i] = dis(aleatorio); 
-		return true;
-	}
-	else
-		return false;
+    uniform_int_distribution<> dis(lowlim, uplim);
+    if(lowlim <= uplim)
+    {
+        for(unsigned i = 0; i < vect.size(); i++)
+            vect[i] = dis(aleatorio); 
+        return true;
+    }
+    else
+        return false;
 }
 
 /**
@@ -60,26 +60,53 @@ void CountSort(vector<int> & vectorToSort, int max)
         vector<int> sorted( vectorToSort.size() );
         vector<int> aux(max);
         
-        PrintVector(vectorToSort); 
-        
-        for(unsigned i = 0; i < vectorToSort.size(); i++)
-            aux[ vectorToSort[i] ]++;  ///< aux[i] contiene cuantas veces aparece i+1 en v
-
-        PrintVector(aux);     
+        for(unsigned i = 0; i < vectorToSort.size(); i=i+10)
+        {
+            aux[ vectorToSort[i] ]++;  ///< aux[i] contiene cuantas veces aparece i+1 en v  
+            aux[ vectorToSort[i+1] ]++; 
+            aux[ vectorToSort[i+2] ]++; 
+            aux[ vectorToSort[i+3] ]++; 
+            aux[ vectorToSort[i+4] ]++; 
+            aux[ vectorToSort[i+5] ]++; 
+            aux[ vectorToSort[i+6] ]++; 
+            aux[ vectorToSort[i+7] ]++; 
+            aux[ vectorToSort[i+8] ]++; 
+            aux[ vectorToSort[i+9] ]++; 
+        }
             
         for(int i = 1; i < max; i++)
+        {
             aux[i] += aux[i-1];  ///< aux[i] contiene en que pos tiene que ir i+1
+        }
             
         for(int i = 0; i < max; i++) ///< Ajuste para añadir el 0
-            aux[ i ]--;  
-
-        PrintVector(aux);    
-            
-        for(int i = vectorToSort.size() - 1; i >= 0; i--)
         {
-            PrintVector(sorted);  
+            aux[ i ]--; 
+        }
+            
+
+        for(int i = vectorToSort.size() - 1; i >= 0; i=i-10)
+        {
             sorted[ aux[ vectorToSort[i] ] ]= vectorToSort[i];
             aux[ vectorToSort[i] ]--;
+            sorted[ aux[ vectorToSort[i-1] ] ]= vectorToSort[i-1];
+            aux[ vectorToSort[i-1] ]--;
+            sorted[ aux[ vectorToSort[i-2] ] ]= vectorToSort[i-2];
+            aux[ vectorToSort[i-2] ]--;
+            sorted[ aux[ vectorToSort[i-3] ] ]= vectorToSort[i-3];
+            aux[ vectorToSort[i-3] ]--;
+            sorted[ aux[ vectorToSort[i-4] ] ]= vectorToSort[i-4];
+            aux[ vectorToSort[i-4] ]--;
+            sorted[ aux[ vectorToSort[i-5] ] ]= vectorToSort[i-5];
+            aux[ vectorToSort[i-5] ]--;
+            sorted[ aux[ vectorToSort[i-6] ] ]= vectorToSort[i-6];
+            aux[ vectorToSort[i-6] ]--;
+            sorted[ aux[ vectorToSort[i-7] ] ]= vectorToSort[i-7];
+            aux[ vectorToSort[i-7] ]--;
+            sorted[ aux[ vectorToSort[i-8] ] ]= vectorToSort[i-8];
+            aux[ vectorToSort[i-8] ]--;
+            sorted[ aux[ vectorToSort[i-9] ] ]= vectorToSort[i-9];
+            aux[ vectorToSort[i-9] ]--;
         }
 
         vectorToSort = sorted;
@@ -97,25 +124,25 @@ void CountSort(vector<int> & vectorToSort, int max)
  */
 void RadixSortVector(vector<int> & vectorToSort, int max)
 {
-  unsigned n = vectorToSort.size();
-	int d;
-	vector< vector<int> > aux(BASE_NUM);
+    unsigned n = vectorToSort.size();
+    int d;
+    vector< vector<int> > aux(BASE_NUM);   
 
-	unsigned iterations = log2(max) / 4;
-  for(unsigned i = 0; i <= iterations; i++)
-  {
-    for(unsigned j = 0; j < BASE_NUM; j++)
-			aux[j].clear();
-
-    for(unsigned j = 0; j < n; j++)
+    unsigned iterations = log2(max) / 4;
+    for(unsigned i = 0; i <= iterations; i++)
     {
-			d = Digito( i, vectorToSort[j] );
-			aux[d].push_back( vectorToSort[j] );
-		}
-		vectorToSort = aux[0];
-		for(unsigned j = 1; j < BASE_NUM; j++)
-			ConcatenarVector(vectorToSort, aux[j]);
-	}
+        for(unsigned j = 0; j < BASE_NUM; j++)
+            aux[j].clear();
+
+        for(unsigned j = 0; j < n; j++)
+        {
+            d = Digito( i, vectorToSort[j] );
+            aux[d].push_back( vectorToSort[j] );
+        }
+        vectorToSort = move( aux[0] );
+        for(unsigned j = 1; j < BASE_NUM; j++)
+            ConcatenarVector(vectorToSort, aux[j]);
+    }
 }
 
 /**
@@ -130,8 +157,8 @@ void RadixSortVector(vector<int> & vectorToSort, int max)
 
 void ConcatenarVector(vector<int> & v1, const vector <int> & v2)
 {
-	for(unsigned i = 0;i < v2.size(); i++)
-		v1.push_back( v2[i] );
+    for(unsigned i = 0;i < v2.size(); i++)
+        v1.push_back( v2[i] );
 }
 
 /**
@@ -145,10 +172,10 @@ void ConcatenarVector(vector<int> & v1, const vector <int> & v2)
  */
 int Digito(int pos, int num)
 {
-	for(int i = 0; i < pos; i++)
-		num = num >> 4;
-	num = num % BASE_NUM;
-	return num;
+    for(int i = 0; i < pos; i++)
+        num = num >> 4;
+    num = num % BASE_NUM;
+    return num;
 }
 
 /**
@@ -162,9 +189,9 @@ int Digito(int pos, int num)
  */
 bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 & aleatorio)
 {
-	uniform_int_distribution<> dis(lowlim, uplim);
-	if(lowlim <= uplim)
-	{
+    uniform_int_distribution<> dis(lowlim, uplim);
+    if(lowlim <= uplim)
+    {
         auto iter=lista.begin();
         while(iter!=lista.end())
         {
@@ -172,9 +199,9 @@ bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 & aleatorio)
             std::advance(iter,1);
         }
         return true;
-	}
-	else
-		return false;
+    }
+    else
+        return false;
 }
 
 /**
@@ -192,23 +219,23 @@ void RadixSortList(list<int> & lista, int max)
     vector<list<int> > aux(BASE_NUM);
 
     unsigned iterations = log2(max) / 4;
-    for(unsigned i = 0;i <= iterations; i++)
+    for(unsigned i = 0; i <= iterations; i++)
     {
-    for(unsigned j = 0; j < BASE_NUM; j++)
-        aux[j].clear();
+    for(unsigned j = 1; j < BASE_NUM; j++)
+            aux[j].clear();
 
-        auto iter=lista.begin();
-        while(iter!=lista.end())
-        {
-            d = Digito( i, *iter );
-            aux[d].push_back( *iter );
-            std::advance(iter,1);
-        }
+            auto iter=lista.begin();
+            while(iter!=lista.end())
+            {
+                    d = Digito( i, *iter );
+                    aux[d].push_back( *iter );
+                    std::advance(iter,1);
+            }
 
     for(unsigned j = 1; j < BASE_NUM; j++)
         aux[0].splice(aux[0].end(), aux[j]);
-    lista = aux[0];
-    }
+        lista = move( aux[0] );
+        }
 }
 
 /**
@@ -221,9 +248,9 @@ void RadixSortList(list<int> & lista, int max)
  */
 void PrintVector(const vector<int> & vect) 
 {
-	for(auto v : vect)
-		cout << "[" << v << "]";
-	cout << endl; 
+    for(auto v : vect)
+        cout << "[" << v << "]";
+    cout << endl; 
 }
 
 /**
@@ -236,7 +263,7 @@ void PrintVector(const vector<int> & vect)
  */
 void PintList(const list<int> & lis) 
 {
-	for(auto l : lis)
-		cout << "[" << l <<"]";
-	cout << endl;
+    for(auto l : lis)
+        cout << "[" << l <<"]";
+    cout << endl;
 }
