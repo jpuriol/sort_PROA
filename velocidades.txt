@@ -1,0 +1,3 @@
+Tiempo medio Countsort: 0.000262346
+Tiempo medio RadixSort Vector: 0.000259749
+Tiempo medio RadixSort Lista: 0.00226877
