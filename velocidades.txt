@@ -1,3 +1,18 @@
+----Preincremento---
 Tiempo medio Countsort: 0.000262346
 Tiempo medio RadixSort Vector: 0.000259749
 Tiempo medio RadixSort Lista: 0.00226877
+--------------------
+
+---Reservar memoria antes de concatenar--
+Tiempo medio Countsort: 0.000288365
+Tiempo medio RadixSort Vector: 0.000231682
+Tiempo medio RadixSort Lista: 0.00238795
+------------------------------------------
+
+
+---STL array RadixSort---
+Tiempo medio Countsort: 0.000287141
+Tiempo medio RadixSort Vector: 0.000229026
+Tiempo medio RadixSort Lista: 0.002446
+-------------------------

@@ -16,7 +16,8 @@
 #include <vector>
 #include <list>
 #include <random>
-#include <math.h>
+#include <array>
+#include <cmath>
 using namespace std;
 
 const int BASE_NUM = 16;
@@ -126,7 +127,7 @@ void RadixSortVector(vector<int> & vectorToSort, int max)
 {
     unsigned n = vectorToSort.size();
     int d;
-    vector< vector<int> > aux(BASE_NUM);   
+    array< vector<int>, BASE_NUM > aux;   
 
     unsigned iterations = log2(max) / 4;
     for(unsigned i = 0; i <= iterations; ++i)
@@ -216,7 +217,7 @@ bool RandomList (list<int> & listToSort, int lowlim, int uplim, mt19937 & aleato
 void RadixSortList(list<int> & listToSort, int max)
 {
     int d;
-    vector<list<int> > aux(BASE_NUM);
+    array<list<int>, BASE_NUM > aux;
 
     unsigned iterations = log2(max) / 4;
     for(unsigned i = 0; i <= iterations; ++i)
