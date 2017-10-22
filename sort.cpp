@@ -27,7 +27,7 @@ void ConcatenarVector(vector<int> &, const vector <int> &);
  *
  * Generara un vector de enteros aleatorios
  *
- * @param[out] vect Vector de enteros con tamaño asignado
+ * @param[out] vect Vector de enteros con tamaï¿½o asignado
  * @param[in] lowlim Limite inferior aleatorio
  * @param[in] uplim Limite superior aleatorio
  * @return True if lowlim <= uplim False if lowlim>uplim
@@ -37,7 +37,7 @@ bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 & aleatori
     uniform_int_distribution<> dis(lowlim, uplim);
     if(lowlim <= uplim)
     {
-        for(unsigned i = 0; i < vect.size(); i++)
+        for(unsigned i = 0; i < vect.size(); ++i)
             vect[i] = dis(aleatorio); 
         return true;
     }
@@ -56,57 +56,57 @@ bool RandomVector( vector<int> & vect, int lowlim, int uplim, mt19937 & aleatori
  */
 void CountSort(vector<int> & vectorToSort, int max)
 {
-        ++max; ///< Añade el 0
+        ++max; ///< AÃ±ade el 0
         vector<int> sorted( vectorToSort.size() );
         vector<int> aux(max);
         
         for(unsigned i = 0; i < vectorToSort.size(); i=i+10)
         {
-            aux[ vectorToSort[i] ]++;  ///< aux[i] contiene cuantas veces aparece i+1 en v  
-            aux[ vectorToSort[i+1] ]++; 
-            aux[ vectorToSort[i+2] ]++; 
-            aux[ vectorToSort[i+3] ]++; 
-            aux[ vectorToSort[i+4] ]++; 
-            aux[ vectorToSort[i+5] ]++; 
-            aux[ vectorToSort[i+6] ]++; 
-            aux[ vectorToSort[i+7] ]++; 
-            aux[ vectorToSort[i+8] ]++; 
-            aux[ vectorToSort[i+9] ]++; 
+            ++aux[ vectorToSort[i] ];  ///< aux[i] contiene cuantas veces aparece i+1 en v  
+            ++aux[ vectorToSort[i+1] ]; 
+            ++aux[ vectorToSort[i+2] ]; 
+            ++aux[ vectorToSort[i+3] ]; 
+            ++aux[ vectorToSort[i+4] ]; 
+            ++aux[ vectorToSort[i+5] ]; 
+            ++aux[ vectorToSort[i+6] ]; 
+            ++aux[ vectorToSort[i+7] ]; 
+            ++aux[ vectorToSort[i+8] ]; 
+            ++aux[ vectorToSort[i+9] ]; 
         }
             
-        for(int i = 1; i < max; i++)
+        for(int i = 1; i < max; ++i)
         {
             aux[i] += aux[i-1];  ///< aux[i] contiene en que pos tiene que ir i+1
         }
             
-        for(int i = 0; i < max; i++) ///< Ajuste para añadir el 0
+        for(int i = 0; i < max; ++i) ///< Ajuste para aÃ±adir el 0
         {
-            aux[ i ]--; 
+            --aux[i]; 
         }
             
 
         for(int i = vectorToSort.size() - 1; i >= 0; i=i-10)
         {
             sorted[ aux[ vectorToSort[i] ] ]= vectorToSort[i];
-            aux[ vectorToSort[i] ]--;
+            --aux[ vectorToSort[i] ];
             sorted[ aux[ vectorToSort[i-1] ] ]= vectorToSort[i-1];
-            aux[ vectorToSort[i-1] ]--;
+            --aux[ vectorToSort[i-1] ];
             sorted[ aux[ vectorToSort[i-2] ] ]= vectorToSort[i-2];
-            aux[ vectorToSort[i-2] ]--;
+            --aux[ vectorToSort[i-2] ];
             sorted[ aux[ vectorToSort[i-3] ] ]= vectorToSort[i-3];
-            aux[ vectorToSort[i-3] ]--;
+            --aux[ vectorToSort[i-3] ];
             sorted[ aux[ vectorToSort[i-4] ] ]= vectorToSort[i-4];
-            aux[ vectorToSort[i-4] ]--;
+            --aux[ vectorToSort[i-4] ];
             sorted[ aux[ vectorToSort[i-5] ] ]= vectorToSort[i-5];
-            aux[ vectorToSort[i-5] ]--;
+            --aux[ vectorToSort[i-5] ];
             sorted[ aux[ vectorToSort[i-6] ] ]= vectorToSort[i-6];
-            aux[ vectorToSort[i-6] ]--;
+            --aux[ vectorToSort[i-6] ];
             sorted[ aux[ vectorToSort[i-7] ] ]= vectorToSort[i-7];
-            aux[ vectorToSort[i-7] ]--;
+            --aux[ vectorToSort[i-7] ];
             sorted[ aux[ vectorToSort[i-8] ] ]= vectorToSort[i-8];
-            aux[ vectorToSort[i-8] ]--;
+            --aux[ vectorToSort[i-8] ];
             sorted[ aux[ vectorToSort[i-9] ] ]= vectorToSort[i-9];
-            aux[ vectorToSort[i-9] ]--;
+            --aux[ vectorToSort[i-9] ];
         }
 
         vectorToSort = sorted;
@@ -129,18 +129,18 @@ void RadixSortVector(vector<int> & vectorToSort, int max)
     vector< vector<int> > aux(BASE_NUM);   
 
     unsigned iterations = log2(max) / 4;
-    for(unsigned i = 0; i <= iterations; i++)
+    for(unsigned i = 0; i <= iterations; ++i)
     {
-        for(unsigned j = 0; j < BASE_NUM; j++)
+        for(unsigned j = 0; j < BASE_NUM; ++j)
             aux[j].clear();
 
-        for(unsigned j = 0; j < n; j++)
+        for(unsigned j = 0; j < n; ++j)
         {
             d = Digito( i, vectorToSort[j] );
             aux[d].push_back( vectorToSort[j] );
         }
         vectorToSort = move( aux[0] );
-        for(unsigned j = 1; j < BASE_NUM; j++)
+        for(unsigned j = 1; j < BASE_NUM; ++j)
             ConcatenarVector(vectorToSort, aux[j]);
     }
 }
@@ -172,7 +172,7 @@ void ConcatenarVector(vector<int> & v1, const vector <int> & v2)
  */
 int Digito(int pos, int num)
 {
-    for(int i = 0; i < pos; i++)
+    for(int i = 0; i < pos; ++i)
         num = num >> 4;
     num = num % BASE_NUM;
     return num;
@@ -180,20 +180,20 @@ int Digito(int pos, int num)
 
 /**
  *
- * Generara una lista de enteros aleatorios
+ * Generara una listToSort de enteros aleatorios
  *
- * @param lista Lista de enteros con tamano asignado
+ * @param listToSort ListToSort de enteros con tamano asignado
  * @param lowlim Limite inferior aleatorio
  * @param uplim Limite superior aleatorio
  * @return True if lowlim <= uplim False if lowlim>uplim
  */
-bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 & aleatorio)
+bool RandomList (list<int> & listToSort, int lowlim, int uplim, mt19937 & aleatorio)
 {
     uniform_int_distribution<> dis(lowlim, uplim);
     if(lowlim <= uplim)
     {
-        auto iter=lista.begin();
-        while(iter!=lista.end())
+        auto iter=listToSort.begin();
+        while(iter!=listToSort.end())
         {
             *iter = dis(aleatorio); 
             std::advance(iter,1);
@@ -206,35 +206,35 @@ bool RandomList (list<int> & lista, int lowlim, int uplim, mt19937 & aleatorio)
 
 /**
  *
- * Aplicara el algoritmo LSDRadixSort sobre una lista
+ * Aplicara el algoritmo LSDRadixSort sobre una listToSort
  *
  *
- * @param lista Lista a ordenar
- * @param max Numero maximo que puede alcanzar la lista
+ * @param listToSort ListToSort a ordenar
+ * @param max Numero maximo que puede alcanzar la listToSort
  *
  */
-void RadixSortList(list<int> & lista, int max)
+void RadixSortList(list<int> & listToSort, int max)
 {
     int d;
     vector<list<int> > aux(BASE_NUM);
 
     unsigned iterations = log2(max) / 4;
-    for(unsigned i = 0; i <= iterations; i++)
+    for(unsigned i = 0; i <= iterations; ++i)
     {
-    for(unsigned j = 1; j < BASE_NUM; j++)
+    for(unsigned j = 1; j < BASE_NUM; ++j)
             aux[j].clear();
 
-            auto iter=lista.begin();
-            while(iter!=lista.end())
+            auto iter=listToSort.begin();
+            while(iter!=listToSort.end())
             {
                     d = Digito( i, *iter );
                     aux[d].push_back( *iter );
-                    std::advance(iter,1);
+                    ++iter;
             }
 
-    for(unsigned j = 1; j < BASE_NUM; j++)
+    for(unsigned j = 1; j < BASE_NUM; ++j)
         aux[0].splice(aux[0].end(), aux[j]);
-        lista = move( aux[0] );
+        listToSort = move( aux[0] );
         }
 }
 
@@ -255,10 +255,10 @@ void PrintVector(const vector<int> & vect)
 
 /**
  *
- * Imprime una Lista por pantalla
+ * Imprime una lista por pantalla
  *
  *
- * @param lista Lista a imprimir
+ * @param listToSort lista a imprimir
  *
  */
 void PintList(const list<int> & lis) 
