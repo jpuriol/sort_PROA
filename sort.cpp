@@ -63,16 +63,16 @@ void CountSort(vector<int> & vectorToSort, int max)
         
         for(unsigned i = 0; i < vectorToSort.size(); i=i+10)
         {
-            ++aux[ vectorToSort[i] ];  ///< aux[i] contiene cuantas veces aparece i+1 en v  
-            ++aux[ vectorToSort[i+1] ]; 
-            ++aux[ vectorToSort[i+2] ]; 
-            ++aux[ vectorToSort[i+3] ]; 
-            ++aux[ vectorToSort[i+4] ]; 
-            ++aux[ vectorToSort[i+5] ]; 
-            ++aux[ vectorToSort[i+6] ]; 
-            ++aux[ vectorToSort[i+7] ]; 
-            ++aux[ vectorToSort[i+8] ]; 
-            ++aux[ vectorToSort[i+9] ]; 
+            aux[ vectorToSort[i] ]++;  ///< aux[i] contiene cuantas veces aparece i+1 en v  
+            aux[ vectorToSort[i+1] ]++; 
+            aux[ vectorToSort[i+2] ]++; 
+            aux[ vectorToSort[i+3] ]++; 
+            aux[ vectorToSort[i+4] ]++; 
+            aux[ vectorToSort[i+5] ]++; 
+            aux[ vectorToSort[i+6] ]++; 
+            aux[ vectorToSort[i+7] ]++; 
+            aux[ vectorToSort[i+8] ]++; 
+            aux[ vectorToSort[i+9] ]++; 
         }
             
         for(int i = 1; i < max; ++i)
