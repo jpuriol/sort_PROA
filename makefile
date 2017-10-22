@@ -15,7 +15,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 all : $(TESTS)
 
 clean :
-	rm -f $(TESTS) gtest.a gtest_main.a *.o
+	rm -f $(TESTS) gtest.a gtest_main.a *.o *.out
 
 
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
@@ -49,4 +49,4 @@ sort_main.o: sort_main.cpp
 	g++ -std=c++11 -O2 -Wall -Wextra -c sort_main.cpp 
 
 sort_main: sort_main.o sort.o
-	g++ -std=c++11 -O2 -Wall -Wextra sort_main.o sort.o -o sort_main
+	g++ -std=c++11 -O2 -Wall -Wextra sort_main.o sort.o -o sort_main.out
