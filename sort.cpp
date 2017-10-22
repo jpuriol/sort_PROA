@@ -158,7 +158,8 @@ void RadixSortVector(vector<int> & vectorToSort, int max)
 
 void ConcatenarVector(vector<int> & v1, const vector <int> & v2)
 {
-    for(unsigned i = 0;i < v2.size(); i++)
+    v1.reserve(v1.size() + v2.size());
+    for(unsigned i = 0; i < v2.size(); i++)
         v1.push_back( v2[i] );
 }
 
