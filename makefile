@@ -6,7 +6,7 @@ CPPFLAGS += -std=c++11 -isystem $(GTEST_DIR)/include
 
 CXXFLAGS += -g -Wall -Wextra -pthread -O2
 
-TESTS = sort_unittests sort_main
+TESTS = sort_unittests sort_main sort_stl
 
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
@@ -50,3 +50,6 @@ sort_main.o: sort_main.cpp
 
 sort_main: sort_main.o sort.o
 	g++ -std=c++11 -O2 -Wall -Wextra sort_main.o sort.o -o sort_main.out
+	
+sort_stl: sort_stl.cpp
+	g++ -std=c++11 -O2 -Wall -Wextra sort_stl.cpp -o sort_stl.out
